@@ -25,7 +25,7 @@ namespace MagicApp
             services.AddServerSideBlazor();
 
             //Dependecies Injection
-            services.AddScoped<IStore<UserState>, User>();
+            services.AddScoped<IStore<UserState>, UserStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

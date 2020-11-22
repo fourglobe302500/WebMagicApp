@@ -1,0 +1,25 @@
+﻿@inject IStore<UserState> user
+@if (user.State.Name == "Guest")
+{
+    <a href="Login">Login</a>
+    <a href="Register">Register</a>
+}
+else
+{
+    <a href="/" @onclick="logOut">Log Out</a>
+    <a href="/Account">View Account</a>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        user.AddListener(() => StateHasChanged());
+    }
+
+    public void logOut()
+    {
+        ((UserStore)user).ChangeState("Guest", 0);
+    }
+}

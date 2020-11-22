@@ -1,0 +1,31 @@
+﻿@page "/Account"
+
+@inject IStore<UserState> user
+
+@implements IDisposable
+
+<h3>@user.State.Name</h3>
+<br />
+<br />
+<h5>@user.State.ID</h5>
+
+@code {
+    public string id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        user.AddListener(StateChanged);
+    }
+
+    public void StateChanged()
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        user.RemoveListener(StateChanged);
+    }
+}

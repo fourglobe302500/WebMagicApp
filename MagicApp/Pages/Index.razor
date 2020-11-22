@@ -1,10 +1,27 @@
 ﻿@page "/"
 
+@implements IDisposable
+
 @inject IStore<UserState> user
 
-<h1>Hello, @user.State.Name @user.State.ID!</h1>
+<h1>Hello, @user.State.Name!</h1>
 
 @code
 {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
 
+        user.AddListener(ChangeState);
+    }
+
+    public void ChangeState()
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        user.RemoveListener(ChangeState);
+    }
 }

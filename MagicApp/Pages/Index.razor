@@ -1,7 +1,10 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@inject IStore<UserState> user
 
-Welcome to your new app.
+<h1>Hello, @user.State.Name @user.State.ID!</h1>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code
+{
+
+}

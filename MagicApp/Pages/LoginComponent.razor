@@ -1,0 +1,44 @@
+﻿@page "/Login"
+
+@using MagicApp.Models
+
+@inject IStore<UserState> state
+@inject NavigationManager NavigationManager
+
+<h3>Login</h3>
+
+<EditForm Model="person" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <label>
+        Username:<br />
+        <InputText id="userName" placeholder="Username" @bind-Value="person.Name"></InputText>
+    </label>
+    <br />
+    <br />
+
+    <label>
+        Password:<br />
+        <InputText type="password" placeholder="password" id="password" @bind-Value="person.Password"></InputText>
+    </label>
+    <br />
+    <br />
+
+    <input type="submit" value="Login" />
+</EditForm>
+
+@code {
+    UserModel person = new UserModel();
+
+    public void ValidSubmit()
+    {
+        person.ValidSubmit(state);
+        NavigationManager.NavigateTo("/");
+    }
+
+    public void InvalidSubmit()
+    {
+
+    }
+}
